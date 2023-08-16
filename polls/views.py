@@ -5,7 +5,7 @@ from polls.models import Question, Choice
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    latest_question_list = Question.objects.all().order_by('created_at')[:5]
+    latest_question_list = Question.objects.all().order_by('-created_at')
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
@@ -21,7 +21,7 @@ def vote(request: HttpRequest, question_id: int) -> HttpResponse:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         context = {'question': question,
-                   'error_message': "You didn't select a choice."}
+                   'error_message': "하나를 선택해 주세요."}
         return render(request, 'polls/detail.html', context)
     else:
         selected_choice.votes += 1
