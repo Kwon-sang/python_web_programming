@@ -2,11 +2,20 @@ from django.contrib import admin
 from .models import Question, Choice
 
 
-@admin.register(Question)
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 2
+
+
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ['created_at']
+    list_display = ['question_text', 'created_at']
+    list_filter = ['created_at']
+    search_fields = ['question_text']
+
+    fields = ['question_text', 'created_at']
+    inlines = [ChoiceInline]
 
 
-@admin.register(Choice)
-class ChoiceAdmin(admin.ModelAdmin):
-    pass
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Choice)
