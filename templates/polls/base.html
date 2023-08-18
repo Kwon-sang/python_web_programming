@@ -1,4 +1,12 @@
+{% extends 'base.html' %}
 <fieldset>
+    {% block sidebar %}
+        {{ block.super }}
+        <ul>
+            <li><a href="{% url 'polls:index' %}">Polls Home</a> </li>
+        </ul>
+    {% endblock %}
+
     {% block content %}
     {% endblock %}
 </fieldset>

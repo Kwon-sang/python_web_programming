@@ -9,11 +9,10 @@ class ChoiceInline(admin.TabularInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     readonly_fields = ['created_at']
+    # fields = ['question_text', 'created_at']
     list_display = ['question_text', 'created_at']
     list_filter = ['created_at']
     search_fields = ['question_text']
-
-    fields = ['question_text', 'created_at']
     inlines = [ChoiceInline]
 
 

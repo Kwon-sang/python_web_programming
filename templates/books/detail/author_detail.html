@@ -1,0 +1,10 @@
+{% extends 'books/base_books.html' %}
+
+{% block content %}
+    <h1>{{ author.name }}</h1>
+    <br>
+    <ul>
+        <li>{{ author.salutation }}</li>
+        <li>Author Email : {{ author.email }}</li>
+    </ul>
+{% endblock %}
